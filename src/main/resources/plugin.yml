@@ -1,0 +1,12 @@
+name: Nekojosen
+version: '${project.version}'
+main: com.nekozouneko.nekojosen.Nekojosen
+api-version: 1.16
+authors: [ Taitaitatata ]
+description: Nekozouneko Serverの攻城戦プラグイン
+
+commands:
+  nekojosen:
+    aliases: [kojosen, game]
+    description: "攻城戦のダッシュボードを表示します。"
+    permission: "nekojosen.command"

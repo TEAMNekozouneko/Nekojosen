@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class ItemStackBuilder {
 
-    protected final ItemStack stack;
+    private final ItemStack stack;
     private final ItemMeta meta;
 
     public ItemStackBuilder(Material material) {
@@ -29,7 +29,6 @@ public class ItemStackBuilder {
 
     public ItemStack build() {
         stack.setItemMeta(meta);
-        Scoreboard sb = null;
         return stack;
     }
 

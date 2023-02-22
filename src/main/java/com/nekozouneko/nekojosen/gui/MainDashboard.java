@@ -39,14 +39,13 @@ public final class MainDashboard {
                 .bukkitData(plugin.newKey("value"), PersistentDataType.STRING, "game")
                 .build();
 
-        inv.setItem(1, game);
+        inv.setItem(0, game);
         inv.setItem(2, settings);
-        inv.setItem(3, map);
+        inv.setItem(4, map);
         p.openInventory(inv);
     }
 
     public static boolean isHandleable(InventoryClickEvent e) {
-        Bukkit.broadcastMessage(e.getView().getTitle());
         return (e.getView().getTitle().matches("^.+ \\[DASHBOARD]$"));
     }
 
@@ -69,11 +68,13 @@ public final class MainDashboard {
             if (av != null && vv != null && av.equals("open_gui")) {
                 switch (vv) {
                     case "game":
+                        new GameDashboard(Nekojosen.getInstance(), p).open();
                         break;
                     case "settings":
                         GameSettings.open(p);
                         break;
                     case "map":
+                        MapDashboard.open(p);
                         break;
                 }
             }

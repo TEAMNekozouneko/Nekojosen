@@ -1,7 +1,9 @@
-package com.nekozouneko.nekojosen;
+package com.nekozouneko.nekojosen.game.map;
 
+import com.google.common.base.Preconditions;
+import com.nekozouneko.nekojosen.Util;
 import com.nekozouneko.nekojosen.game.KojosenGame;
-import org.bukkit.Location;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
@@ -19,8 +21,12 @@ public class KojosenMap {
     private final Map<String, BlockVector> beacons = new HashMap<>();
     private final Map<String, Vector> spawns = new HashMap<>();
 
-    public KojosenMap(World world, String name) {
-        this.world = world.getName();
+    public KojosenMap(String world, String name) {
+        Preconditions.checkArgument(world != null, "World cannot be null.");
+        Preconditions.checkArgument(name != null, "Map name cannot be null.");
+        Preconditions.checkArgument(Bukkit.getWorld(world) != null, "World is not exists.");
+
+        this.world = world;
         this.id = String.format("%07x", new Random().nextInt(Integer.MAX_VALUE)+1).toUpperCase();
         this.name = name;
     }
@@ -43,6 +49,15 @@ public class KojosenMap {
 
     public Map<String, Vector> getSpawns() {
         return spawns;
+    }
+
+    public Vector getSpawn(KojosenGame.GTeam team) {
+        return spawns.get(team.name());
+    }
+
+    public Vector getSpawnOrWorldSpawn(KojosenGame.GTeam team) {
+        World w = Bukkit.getWorld(world);
+        return spawns.getOrDefault(team.name(), Util.asVector(w.getSpawnLocation()));
     }
 
     public void setName(String name) {

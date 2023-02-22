@@ -1,6 +1,6 @@
 package com.nekozouneko.nekojosen.game;
 
-import com.nekozouneko.nekojosen.KojosenMap;
+import com.nekozouneko.nekojosen.game.map.KojosenMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;

@@ -10,3 +10,41 @@ commands:
     aliases: [kojosen, game]
     description: "攻城戦のダッシュボードを表示します。"
     permission: "nekojosen.command"
+
+  join:
+    aliases: ["j", "sanka"]
+    description: "攻城戦に参加します。"
+
+  leave:
+    aliases: ["l", "taishutu"]
+    description: "攻城戦から退出します。"
+
+default-permission: true
+
+permissions:
+  nekojosen:
+    default: op
+
+    children:
+      nekojosen.command: true
+
+  nekojosen.command:
+    default: op
+
+    children:
+      nekojosen.command.join: true
+      nekojosen.command.join.other: true
+      nekojosen.command.leave: true
+      nekojosen.command.leave.other: true
+
+  nekojosen.command.join:
+    default: true
+
+  nekojosen.command.join.other:
+    default: op
+
+  nekojosen.command.leave:
+    default: true
+
+  nekojosen.command.leave.other:
+    default: op
